@@ -13,7 +13,7 @@ const db = mysql.createConnection({
   database: 'gradessystem'
 })
 
-app.post('/addterm', (req, res) => {
+app.post('/terms/add', (req, res) => {
   const termName = req.body.termName
   db.query(
     'INSERT INTO terms (name, courses) VALUE (?,?)',
@@ -29,7 +29,7 @@ app.get('/terms', (req, res) => {
   )
 })
 
-app.post('/addcourse', (req, res) => {
+app.post('/courses/add', (req, res) => {
   const courseName = req.body.courseName
   const credit = req.body.credit
   db.query(
@@ -46,7 +46,7 @@ app.get('/courses', (req, res) => {
   )
 })
 
-app.put('/update_course_list', (req, res) => {
+app.put('/terms/update_courses', (req, res) => {
   const newCourseList = req.body.newCourseList
   const termID = req.body.termID
   db.query(
@@ -55,6 +55,14 @@ app.put('/update_course_list', (req, res) => {
     (err, result) => { if (err) { console.log(err) } else { res.send(result) } }
   )
 })
+
+app.delete('/terms/delete/:id', (req, res) => {
+  const id = req.params.id
+  console.log(id)
+  db.query("DELETE FROM terms WHERE id = ?", id,
+    (err, result) => { if (err) { console.log(err) } else { res.send(result) } }
+  )
+});
 
 app.listen(3001, () => {
   console.log("Server is running on port 3001")

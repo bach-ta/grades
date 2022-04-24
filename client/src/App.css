@@ -1,8 +1,4 @@
 .App {
+  margin: 50px;
   text-align: center;
-}
-
-.Term {
-  border: 1px;
-  display: flex;
 }

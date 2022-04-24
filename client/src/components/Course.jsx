@@ -1,22 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { Card, CardContent, Typography, CardActions, Button, Grid } from '@mui/material'
 
 const Course = ({courseID}) => {
-  const [courseInfo, setCourseInfo] = useState({id: 1, name: "", courses: "[]"})
-  const [termCourses, setTermCourses] = useState([])
-  const [courseName, setCourseName] = useState("")
-  const [credit, setCredit] = useState(3)
-
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/courses').then(res => {
-      
-  //   })
-  // })
-
+  const courseInfo = useSelector(state => state.courses.value.filter(val => {return val.id === courseID})[0])
   return (
-    <div className='Course'>
-      {courseID}
-    </div>
+    <Grid item xs={12}>
+      <Card style={{backgroundColor: '#c5cae9'}}>
+        <CardContent>
+          <Typography> {courseInfo ? courseInfo.name : ""} </Typography>
+        </CardContent>
+      </Card>
+    </Grid>
   )
 }
 
