@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import Home from './components/Home'
 import './App.css'
 

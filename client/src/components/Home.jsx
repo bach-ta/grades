@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTerms } from '../reducers/terms'
 import { setCourses } from '../reducers/courses'
+import { setBlocks } from '../reducers/blocks'
 import Term from './Term'
 import { TextField, Button } from '@mui/material'
 
@@ -11,8 +12,10 @@ const Home = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    axios.get('http://localhost:3001/terms').then(res => { const data = res.data; dispatch(setTerms(data)) }).then(() => {
-      axios.get('http://localhost:3001/courses').then(res => { dispatch(setCourses(res.data)) })
+    axios.get('http://localhost:3001/terms').then(res => { dispatch(setTerms(res.data)) }).then(() => {
+      axios.get('http://localhost:3001/courses').then(res => { dispatch(setCourses(res.data)) }).then(() => {
+        axios.get('http://localhost:3001/blocks').then(res => { dispatch(setBlocks(res.data)) })
+      })
     })
   }, []);
 
@@ -24,7 +27,7 @@ const Home = () => {
       termName: termName
     }).then(() => {
       console.log(`add term ${termName} successfully`)
-      axios.get('http://localhost:3001/terms').then(res => { const data = res.data; dispatch(setTerms(data)) })
+      axios.get('http://localhost:3001/terms').then(res => { dispatch(setTerms(res.data)) })
       setTermName("")
     })
   }
