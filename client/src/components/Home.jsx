@@ -22,7 +22,7 @@ const Home = () => {
   const terms = useSelector(state => state.terms.value).slice(0).reverse()
 
   const postTerm = () => {
-    if (termName === "") return
+    if (!termName) return
     axios.post('http://localhost:3001/terms/add', {
       termName: termName
     }).then(() => {

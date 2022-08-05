@@ -16,11 +16,11 @@ const Course = ({courseID}) => {
   const toggleOpen = () => { setIsOpen(!isOpen) }
 
   const postBlock = block => {
-    if (block.name === "" || block.weight === "") {
+    if (!block.name || !block.weight) {
       alert("Name and weight cannot be empty")
       return
     }
-    if (block.count === 0) {
+    if (!block.count) {
       alert("Number of entries must be a positive integer")
       return
     }

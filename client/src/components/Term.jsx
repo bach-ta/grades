@@ -19,7 +19,7 @@ const Term = ( {termID, expanded} ) => {
   // const [termName, setTermName] = useState(termInfo.name)
 
   const postCourse = () => {
-    if (courseName === "") return
+    if (!courseName) return
     axios.post('http://localhost:3001/courses/add', {
       courseName: courseName
     }).then(() => {
