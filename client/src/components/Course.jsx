@@ -47,7 +47,7 @@ const Course = ({courseID}) => {
     <Grid item xs={12}>
       <Card style={{backgroundColor: '#c5cae9'}}>
         <CardContent>
-          <Typography> {courseInfo ? courseInfo.name : ""} </Typography>
+          <Typography> {courseInfo?.name} </Typography>
           <Tooltip title="Add a Block">
             <IconButton onClick={toggleOpen}><AddIcon /></IconButton>
           </Tooltip>
