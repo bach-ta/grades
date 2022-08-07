@@ -5,17 +5,19 @@ import { setCourses } from '../reducers/courses'
 
 export const addCourse = (courseName, termFk) => {
   if (!courseName) {
-    console.log("Error: courseName is empty")
+    console.log('Error: courseName is empty')
     return
   }
   if (!termFk) {
-    console.log("Error: termFk is empty")
+    console.log('Error: termFk is empty')
     return
   }
-  return axios.post('http://localhost:3001/courses/add', {
-    courseName: courseName,
-    termFk: termFk
-  }).then(() => {
-    console.log(`add course ${courseName} successfully`)
-  })
+  return axios
+    .post('http://localhost:3001/courses/add', {
+      courseName: courseName,
+      termFk: termFk,
+    })
+    .then(() => {
+      console.log(`add course ${courseName} successfully`)
+    })
 }

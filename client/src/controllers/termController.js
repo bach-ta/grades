@@ -2,11 +2,13 @@ import axios from 'axios'
 
 export const addTerm = (termName) => {
   if (!termName) return
-  return axios.post('http://localhost:3001/terms/add', {
-    termName: termName
-  }).then(() => {
-    console.log(`add term ${termName} successfully`)
-  })
+  return axios
+    .post('http://localhost:3001/terms/add', {
+      termName: termName,
+    })
+    .then(() => {
+      console.log(`add term ${termName} successfully`)
+    })
 }
 
 export const deleteTerm = (termPk, termName) => {

@@ -6,8 +6,8 @@ export const coursesSlice = createSlice({
   reducers: {
     setCourses: (state, action) => {
       state.value = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setCourses } = coursesSlice.actions

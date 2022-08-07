@@ -3,10 +3,13 @@ const router = express.Router()
 const db = require('../index')
 
 router.get('/', (req, res) => {
-  db.query(
-    'SELECT * FROM courses',
-    (err, result) => { if (err) { console.log(err) } else { res.send(result) } }
-  )
+  db.query('SELECT * FROM courses', (err, result) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.send(result)
+    }
+  })
 })
 
 router.post('/add', (req, res) => {
@@ -15,7 +18,13 @@ router.post('/add', (req, res) => {
   db.query(
     'INSERT INTO courses (course_name, term_fk) VALUE (?,?)',
     [courseName, termFk],
-    (err, result) => { if (err) { console.log(err) } else { res.send(result) } }
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(result)
+      }
+    }
   )
 })
 

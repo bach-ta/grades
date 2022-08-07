@@ -6,8 +6,8 @@ export const termsSlice = createSlice({
   reducers: {
     setTerms: (state, action) => {
       state.value = action.payload
-    }
-  }
+    },
+  },
 })
 
 export const { setTerms } = termsSlice.actions

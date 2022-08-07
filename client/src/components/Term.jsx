@@ -15,38 +15,53 @@ const Term = () => {
   const params = useParams()
   const termPk = parseInt(params.termPk)
 
-  const terms = useSelector(state => state.terms.value)
-  const termName = terms.filter(term => {return term.term_pk === termPk})[0]?.term_name
+  const terms = useSelector((state) => state.terms.value)
+  const termName = terms.filter((term) => {
+    return term.term_pk === termPk
+  })[0]?.term_name
 
-  const courses = useSelector(state => state.courses.value).filter(course => {return course.term_fk === termPk})
+  const courses = useSelector((state) => state.courses.value).filter(
+    (course) => {
+      return course.term_fk === termPk
+    }
+  )
 
-  const [courseName, setCourseName] = useState("")
-  
+  const [courseName, setCourseName] = useState('')
+
   return (
     <>
       <Typography>{termName}</Typography>
       <label>Add a course: </label>
-      <input placeholder='e.g. MATH 239' type="text" value={courseName} onChange={event => {
-        setCourseName(event.target.value)
-      }}/>
-      <button onClick={() => {
-        addCourse(courseName, termPk).then(() => {
-          axios.get('http://localhost:3001/courses').then(res => {
-            dispatch(setCourses(res.data))
+      <input
+        placeholder="e.g. MATH 239"
+        type="text"
+        value={courseName}
+        onChange={(event) => {
+          setCourseName(event.target.value)
+        }}
+      />
+      <button
+        onClick={() => {
+          addCourse(courseName, termPk).then(() => {
+            axios.get('http://localhost:3001/courses').then((res) => {
+              dispatch(setCourses(res.data))
+            })
           })
-        })
-      }}>
+        }}
+      >
         Add course
       </button>
-      <IconButton onClick={() => { 
-        // TODO
-        deleteTerm(termPk, termName).then(() => {
-          dispatch(setTerms(terms.filter(term => term.termPk !== termPk )))
-          // dispatch children of terms as well
-          navigate("/")
-        })
-      }}>
-        <DeleteIcon/>
+      <IconButton
+        onClick={() => {
+          // TODO
+          deleteTerm(termPk, termName).then(() => {
+            dispatch(setTerms(terms.filter((term) => term.termPk !== termPk)))
+            // dispatch children of terms as well
+            navigate('/')
+          })
+        }}
+      >
+        <DeleteIcon />
       </IconButton>
 
       <ul>
