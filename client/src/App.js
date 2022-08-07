@@ -1,24 +1,28 @@
 import React, { useEffect, FC } from 'react'
-import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Term from './components/Term'
 import { setTerms } from './reducers/terms'
 import { setCourses } from './reducers/courses'
+import TermController from './controllers/termController'
+import CourseController from './controllers/courseController'
 import './App.css'
+
+const termController = new TermController()
+const courseController = new CourseController()
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/terms')
+    termController
+      .getTerms()
       .then((res) => {
         dispatch(setTerms(res.data))
       })
       .then(() => {
-        axios.get('http://localhost:3001/courses').then((res) => {
+        courseController.getCourses().then((res) => {
           dispatch(setCourses(res.data))
         })
       })

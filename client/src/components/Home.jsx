@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextField, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { addTerm } from '../controllers/termController'
+import TermController from '../controllers/termController'
 import { setTerms } from '../reducers/terms'
-import axios from 'axios'
+
+const termController = new TermController()
 
 const Home = () => {
   const [termName, setTermName] = useState('')
@@ -28,9 +29,9 @@ const Home = () => {
       <Button
         variant="contained"
         onClick={() => {
-          addTerm(termName).then(() => {
+          termController.addTerm(termName).then(() => {
             setTermName('')
-            axios.get('http://localhost:3001/terms').then((res) => {
+            termController.getTerms().then((res) => {
               dispatch(setTerms(res.data))
             })
           })

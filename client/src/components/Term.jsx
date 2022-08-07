@@ -3,11 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Typography, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useParams, useNavigate } from 'react-router-dom'
-import { deleteTerm } from '../controllers/termController'
-import { addCourse } from '../controllers/courseController'
+import TermController from '../controllers/termController'
+import CourseController from '../controllers/courseController'
 import { setTerms } from '../reducers/terms'
 import { setCourses } from '../reducers/courses'
-import axios from 'axios'
+
+const termController = new TermController()
+const courseController = new CourseController()
 
 const Term = () => {
   const dispatch = useDispatch()
@@ -42,8 +44,8 @@ const Term = () => {
       />
       <button
         onClick={() => {
-          addCourse(courseName, termPk).then(() => {
-            axios.get('http://localhost:3001/courses').then((res) => {
+          courseController.addCourse(courseName, termPk).then(() => {
+            courseController.getCourses().then((res) => {
               dispatch(setCourses(res.data))
             })
           })
@@ -54,11 +56,15 @@ const Term = () => {
       <IconButton
         onClick={() => {
           // TODO
-          deleteTerm(termPk, termName).then(() => {
-            dispatch(setTerms(terms.filter((term) => term.termPk !== termPk)))
-            // dispatch children of terms as well
-            navigate('/')
-          })
+          termController
+            .deleteTerm(termPk, termName)
+            .then(() => {
+              dispatch(setTerms(terms.filter((term) => term.termPk !== termPk)))
+              // dispatch children of terms as well
+            })
+            .then(() => {
+              navigate('/')
+            })
         }}
       >
         <DeleteIcon />
