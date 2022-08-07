@@ -31,9 +31,12 @@ const Home = () => {
         Add
       </Button>
       
-      {terms.map((term, key) => {
-        return <Link to={`/terms/${term.term_pk}`}> {term.term_name} </Link>
-      })}
+      <ul>
+        {terms.map((term, key) => {
+          return <li><Link to={`/terms/${term.term_pk}`}> {term.term_name} </Link> </li>
+        })}
+      </ul>
+      
     </div>
   )
 }

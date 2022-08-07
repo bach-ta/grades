@@ -11,8 +11,10 @@ import axios from 'axios'
 const Term = () => {
   const dispatch = useDispatch()
   const params = useParams()
-  const termPk = params.termPk
-  const termName = useSelector(state => state.terms.value).filter(val => {return val.termPk === termPk})[0]?.term_name
+  const termPk = parseInt(params.termPk)
+
+  const terms = useSelector(state => state.terms.value)
+  const termName = terms.filter(term => {return term.term_pk === termPk})[0]?.term_name
 
   const [courseName, setCourseName] = useState("")
   
