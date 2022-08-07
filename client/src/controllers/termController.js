@@ -11,9 +11,6 @@ export const addTerm = (termName) => {
 
 export const deleteTerm = (termPk, termName) => {
   if (window.confirm(`Are you sure you want to remove ${termName} term?`)) {
-    axios.delete(`http://localhost:3001/terms/delete/${termPk}`).then(res => {
-      // dispatch(setTerms(terms.filter(val => val.termPk !== termPk )))
-      // dispatch children of terms as well
-    })
+    return axios.delete(`http://localhost:3001/terms/delete/${termPk}`)
   }
 }
