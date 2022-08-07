@@ -24,9 +24,10 @@ const Home = () => {
         }}
       />
       <Button variant="contained" onClick={() => { 
-        addTerm(termName)
-        setTermName("")
-        axios.get('http://localhost:3001/terms').then(res => { dispatch(setTerms(res.data)) })
+        addTerm(termName).then(() => {
+          setTermName("")
+          axios.get('http://localhost:3001/terms').then(res => { dispatch(setTerms(res.data)) })
+        })
       }}>
         Add
       </Button>

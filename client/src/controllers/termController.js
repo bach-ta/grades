@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const addTerm = (termName) => {
   if (!termName) return
-  axios.post('http://localhost:3001/terms/add', {
+  return axios.post('http://localhost:3001/terms/add', {
     termName: termName
   }).then(() => {
     console.log(`add term ${termName} successfully`)

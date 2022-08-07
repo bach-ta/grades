@@ -12,7 +12,7 @@ export const addCourse = (courseName, termFk) => {
     console.log("Error: termFk is empty")
     return
   }
-  axios.post('http://localhost:3001/courses/add', {
+  return axios.post('http://localhost:3001/courses/add', {
     courseName: courseName,
     termFk: termFk
   }).then(() => {
