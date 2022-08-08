@@ -11,9 +11,9 @@ const Home = () => {
   const [termName, setTermName] = useState('')
 
   const dispatch = useDispatch()
-  const terms = useSelector((state) => state.terms.value)
-    .slice(0)
-    .reverse()
+  const terms = useSelector((state) => state.terms)
+
+  console.log(terms)
 
   return (
     <div className="Home">
@@ -40,15 +40,19 @@ const Home = () => {
         Add
       </Button>
 
-      <ul>
-        {terms.map((term, key) => {
-          return (
-            <li>
-              <Link to={`/terms/${term.term_pk}`}>{term.term_name}</Link>
-            </li>
-          )
-        })}
-      </ul>
+      {terms.status === 'succeeded' ? (
+        <ul>
+          {terms.value.map((term, key) => {
+            return (
+              <li>
+                <Link to={`/terms/${term.term_pk}`}>{term.term_name}</Link>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        <p>{terms.error}</p>
+      )}
     </div>
   )
 }
