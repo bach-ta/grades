@@ -27,12 +27,16 @@ const Term = () => {
   const [courseName, setCourseName] = useState('')
 
   if (terms.status != 'succeeded') {
-    return <p>{terms.error}</p>
+    return <p>{terms.status}</p>
   }
 
   const termName = terms.value.filter((term) => {
     return term.term_pk === termPk
-  })[0].term_name
+  })[0]?.term_name
+
+  if (!termName) {
+    return <p>{`No term matches ID ${termPk}`}</p>
+  }
 
   return (
     <>
@@ -62,11 +66,10 @@ const Term = () => {
           // TODO
           termController
             .deleteTerm(termPk, termName)
-            .then(() => {
-              dispatch(
-                setTerms(terms.value.filter((term) => term.termPk !== termPk))
-              )
-              // dispatch children of terms as well
+            ?.then(() => {
+              termController.getTerms().then((res) => {
+                dispatch(setTerms(res.data))
+              })
             })
             .then(() => {
               navigate('/')

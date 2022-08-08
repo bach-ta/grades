@@ -17,6 +17,7 @@ export default class TermController {
   }
 
   deleteTerm = (termPk, termName) => {
+    // TODO: delete all courses associated with term
     if (window.confirm(`Are you sure you want to remove ${termName} term?`)) {
       return axios.delete(`http://localhost:3001/terms/delete/${termPk}`)
     }
