@@ -7,6 +7,7 @@ import TermController from '../controllers/termController'
 import CourseController from '../controllers/courseController'
 import { setTerms } from '../reducers/terms'
 import { setCourses } from '../reducers/courses'
+import Course from './Course'
 
 const termController = new TermController()
 const courseController = new CourseController()
@@ -79,11 +80,9 @@ const Term = () => {
         <DeleteIcon />
       </IconButton>
 
-      <ul>
-        {courses.map((course) => {
-          return <li key={course.course_pk}>{course.course_name}</li>
-        })}
-      </ul>
+      {courses.map((course) => {
+        return <Course key={course.course_pk} coursePk={course.course_pk} />
+      })}
     </>
   )
 }
