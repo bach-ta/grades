@@ -19,8 +19,8 @@ const Course = ({ coursePk }) => {
   return (
     <>
       {courseInfo
-        ? JSON.parse(courseInfo.blockFks).map((blockFk, key) => {
-            return <p>{blockFk}</p>
+        ? JSON.parse(courseInfo.blockFks).map((blockFk) => {
+            return <p key={blockFk}>{blockFk}</p>
           })
         : ''}
     </>

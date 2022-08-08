@@ -4,18 +4,15 @@ import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Term from './components/Term'
 import { fetchTerms } from './reducers/terms'
-import TermController from './controllers/termController'
-import CourseController from './controllers/courseController'
+import { fetchCourses } from './reducers/courses'
 import './App.css'
-
-const termController = new TermController()
-const courseController = new CourseController()
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(fetchTerms())
+    dispatch(fetchCourses())
   }, [])
 
   return (

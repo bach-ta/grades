@@ -17,11 +17,7 @@ const Term = () => {
   const params = useParams()
   const termPk = parseInt(params.termPk)
 
-  const terms = useSelector((state) => state.terms.value)
-  const termName = terms.filter((term) => {
-    return term.term_pk === termPk
-  })[0]?.term_name
-
+  const terms = useSelector((state) => state.terms)
   const courses = useSelector((state) => state.courses.value).filter(
     (course) => {
       return course.term_fk === termPk
@@ -29,6 +25,14 @@ const Term = () => {
   )
 
   const [courseName, setCourseName] = useState('')
+
+  if (terms.status != 'succeeded') {
+    return <p>{terms.error}</p>
+  }
+
+  const termName = terms.value.filter((term) => {
+    return term.term_pk === termPk
+  })[0].term_name
 
   return (
     <>
@@ -59,7 +63,9 @@ const Term = () => {
           termController
             .deleteTerm(termPk, termName)
             .then(() => {
-              dispatch(setTerms(terms.filter((term) => term.termPk !== termPk)))
+              dispatch(
+                setTerms(terms.value.filter((term) => term.termPk !== termPk))
+              )
               // dispatch children of terms as well
             })
             .then(() => {
@@ -71,8 +77,8 @@ const Term = () => {
       </IconButton>
 
       <ul>
-        {courses.map((course, key) => {
-          return <li>{course.course_name}</li>
+        {courses.map((course) => {
+          return <li key={course.course_pk}>{course.course_name}</li>
         })}
       </ul>
     </>

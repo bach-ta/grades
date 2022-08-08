@@ -13,8 +13,6 @@ const Home = () => {
   const dispatch = useDispatch()
   const terms = useSelector((state) => state.terms)
 
-  console.log(terms)
-
   return (
     <div className="Home">
       <TextField
@@ -42,9 +40,9 @@ const Home = () => {
 
       {terms.status === 'succeeded' ? (
         <ul>
-          {terms.value.map((term, key) => {
+          {terms.value.map((term) => {
             return (
-              <li>
+              <li key={term.term_pk}>
                 <Link to={`/terms/${term.term_pk}`}>{term.term_name}</Link>
               </li>
             )
