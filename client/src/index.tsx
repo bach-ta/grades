@@ -7,11 +7,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import termsReducer from './reducers/terms'
 import coursesReducer from './reducers/courses'
+import blocksReducer from './reducers/blocks'
 
 const store = configureStore({
   reducer: {
     terms: termsReducer,
     courses: coursesReducer,
+    blocks: blocksReducer,
   },
 })
 

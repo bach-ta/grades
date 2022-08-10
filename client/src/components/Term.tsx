@@ -6,7 +6,6 @@ import { Typography, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
 import TermController from '../controllers/termController'
 import CourseController from '../controllers/courseController'
-import { setCourses } from '../reducers/courses'
 import Course from './Course'
 
 const termController = new TermController()

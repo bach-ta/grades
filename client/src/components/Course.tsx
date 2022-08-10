@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FC, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   Card,
   CardContent,
@@ -11,16 +11,26 @@ import {
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import BlockForm from './BlockForm'
+import BlockController from '../controllers/blockController'
 
 interface Props {
-	coursePk: number;
+  coursePk: number
 }
 
+const blockController = new BlockController()
+
 const Course: FC<Props> = ({ coursePk }) => {
+  const dispatch = useDispatch()
   const courses = useSelector((state: any) => state.courses)
   const courseName = courses.value.filter((course) => {
     return course.course_pk === coursePk
   })[0].course_name
+
+  const blocks = useSelector((state: any) => state.blocks.value).filter(
+    (block) => {
+      return block.course_fk === coursePk
+    }
+  )
 
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = () => {
@@ -37,14 +47,22 @@ const Course: FC<Props> = ({ coursePk }) => {
               <AddIcon />
             </IconButton>
           </Tooltip>
-          {/* {JSON.parse(blocks).map((block) => {
+          {blocks.map((block) => {
             return <p key={block.block_fk}>{block.block_name}</p>
-          })} */}
+          })}
         </CardContent>
         <BlockForm
           isOpen={isOpen}
           handleClose={toggleOpen}
-          // addBlock={addBlock}
+          addBlock={(params) => {
+            return blockController.addBlock(
+              {
+                ...params,
+                courseFk: coursePk,
+              },
+              dispatch
+            )
+          }}
         />
       </Card>
     </Grid>

@@ -6,6 +6,7 @@ import Home from './components/Home'
 import Term from './components/Term'
 import { fetchTerms } from './reducers/terms'
 import { fetchCourses } from './reducers/courses'
+import { fetchBlocks } from './reducers/blocks'
 import './App.css'
 import { AppDispatch } from '.'
 
@@ -15,6 +16,7 @@ const App: FC = () => {
   useEffect(() => {
     dispatch(fetchTerms())
     dispatch(fetchCourses())
+    dispatch(fetchBlocks())
   }, [dispatch])
 
   return (

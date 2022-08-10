@@ -18,8 +18,10 @@ module.exports = db
 
 const termRoute = require('./routes/TermRoute')
 const courseRoute = require('./routes/CourseRoute')
+const blockRoute = require('./routes/BlockRoute')
 app.use('/terms', termRoute)
 app.use('/courses', courseRoute)
+app.use('/blocks', blockRoute)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)

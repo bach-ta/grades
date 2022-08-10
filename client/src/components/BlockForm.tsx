@@ -1,15 +1,17 @@
 import * as React from 'react'
 import { FC, useState } from 'react'
 import { Dialog, DialogTitle, TextField, Button } from '@mui/material'
+import { BlockParams1 } from './types'
 
 interface Props {
   isOpen: boolean
   handleClose: () => void
+  addBlock: (params: BlockParams1) => boolean
 }
 
-const BlockForm: FC<Props> = ({ isOpen, handleClose /* addBlock */ }) => {
+const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
   const [blockName, setBlockName] = useState('')
-  const [blockWeight, setWeight] = useState('')
+  const [blockWeight, setWeight] = useState(0)
   const [blockCount, setCount] = useState(0)
 
   return (
@@ -30,7 +32,7 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose /* addBlock */ }) => {
         type="number"
         value={blockWeight}
         onChange={(event) => {
-          setWeight(event.target.value)
+          setWeight(parseInt(event.target.value))
         }}
       />
       <TextField
@@ -45,12 +47,18 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose /* addBlock */ }) => {
       <Button
         variant="contained"
         onClick={() => {
-          // addBlock({
-          //   name: blockName,
-          //   blockWeight: blockWeight,
-          //   blockCount: blockCount,
-          //   entries: new Array(blockCount).fill(''),
-          // })
+          const addResult = addBlock({
+            blockName: blockName,
+            blockWeight: blockWeight,
+            blockCount: blockCount,
+            entries: JSON.stringify(new Array(blockCount).fill('')),
+          })
+          if (addResult) {
+            setBlockName('')
+            setWeight(0)
+            setCount(0)
+            handleClose()
+          }
         }}
       >
         Add
