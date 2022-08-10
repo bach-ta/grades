@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import * as React from 'react'
+import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Typography, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -12,14 +13,14 @@ import Course from './Course'
 const termController = new TermController()
 const courseController = new CourseController()
 
-const Term = () => {
+const Term: FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
-  const termPk = parseInt(params.termPk)
+  const termPk: number = parseInt(params.termPk ? params.termPk : '')
 
-  const terms = useSelector((state) => state.terms)
-  const courses = useSelector((state) => state.courses.value).filter(
+  const terms = useSelector((state: any) => state.terms)
+  const courses = useSelector((state: any) => state.courses.value).filter(
     (course) => {
       return course.term_fk === termPk
     }
@@ -27,7 +28,7 @@ const Term = () => {
 
   const [courseName, setCourseName] = useState('')
 
-  if (terms.status != 'succeeded') {
+  if (terms.status !== 'succeeded') {
     return <p>{terms.status}</p>
   }
 
@@ -53,7 +54,7 @@ const Term = () => {
       />
       <button
         onClick={() => {
-          courseController.addCourse(courseName, termPk).then(() => {
+          courseController.addCourse(courseName, termPk)?.then(() => {
             courseController.getCourses().then((res) => {
               dispatch(setCourses(res.data))
             })

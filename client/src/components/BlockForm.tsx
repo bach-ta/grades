@@ -1,7 +1,13 @@
-import React, { useState } from 'react'
+import * as React from 'react'
+import { FC, useState } from 'react'
 import { Dialog, DialogTitle, TextField, Button } from '@mui/material'
 
-const BlockForm = ({ handleClose, isOpen /* addBlock */ }) => {
+interface Props {
+  isOpen: boolean;
+	handleClose: () => void;
+}
+
+const BlockForm: FC<Props> = ({ isOpen, handleClose /* addBlock */ }) => {
   const [blockName, setBlockName] = useState('')
   const [blockWeight, setWeight] = useState('')
   const [blockCount, setCount] = useState(0)
@@ -33,7 +39,7 @@ const BlockForm = ({ handleClose, isOpen /* addBlock */ }) => {
         type="number"
         value={blockCount}
         onChange={(event) => {
-          setCount(event.target.value)
+          setCount(parseInt(event.target.value))
         }}
       />
       <Button

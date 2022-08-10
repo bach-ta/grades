@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import * as React from 'react'
+import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { TextField, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
@@ -7,11 +8,11 @@ import { setTerms } from '../reducers/terms'
 
 const termController = new TermController()
 
-const Home = () => {
+const Home: FC = () => {
   const [termName, setTermName] = useState('')
 
   const dispatch = useDispatch()
-  const terms = useSelector((state) => state.terms)
+  const terms = useSelector((state: any) => state.terms)
 
   return (
     <div className="Home">
@@ -27,7 +28,7 @@ const Home = () => {
       <Button
         variant="contained"
         onClick={() => {
-          termController.addTerm(termName).then(() => {
+          termController.addTerm(termName)?.then(() => {
             setTermName('')
             termController.getTerms().then((res) => {
               dispatch(setTerms(res.data))
