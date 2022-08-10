@@ -28,7 +28,7 @@ const Term: FC = () => {
 
   const [courseName, setCourseName] = useState('')
 
-  if (terms.status != 'succeeded') {
+  if (terms.status !== 'succeeded') {
     return <p>{terms.status}</p>
   }
 
