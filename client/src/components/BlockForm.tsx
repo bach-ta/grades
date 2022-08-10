@@ -3,8 +3,8 @@ import { FC, useState } from 'react'
 import { Dialog, DialogTitle, TextField, Button } from '@mui/material'
 
 interface Props {
-  isOpen: boolean;
-	handleClose: () => void;
+  isOpen: boolean
+  handleClose: () => void
 }
 
 const BlockForm: FC<Props> = ({ isOpen, handleClose /* addBlock */ }) => {

@@ -28,12 +28,8 @@ const Home: FC = () => {
       <Button
         variant="contained"
         onClick={() => {
-          termController.addTerm(termName)?.then(() => {
-            setTermName('')
-            termController.getTerms().then((res) => {
-              dispatch(setTerms(res.data))
-            })
-          })
+          termController.addTerm(termName, dispatch)
+          setTermName('')
         }}
       >
         Add

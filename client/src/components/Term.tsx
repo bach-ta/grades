@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Typography, IconButton } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useParams, useNavigate } from 'react-router-dom'
 import TermController from '../controllers/termController'
 import CourseController from '../controllers/courseController'
-import { setTerms } from '../reducers/terms'
 import { setCourses } from '../reducers/courses'
 import Course from './Course'
 
@@ -65,17 +64,8 @@ const Term: FC = () => {
       </button>
       <IconButton
         onClick={() => {
-          // TODO
-          termController
-            .deleteTerm(termPk, termName)
-            ?.then(() => {
-              termController.getTerms().then((res) => {
-                dispatch(setTerms(res.data))
-              })
-            })
-            .then(() => {
-              navigate('/')
-            })
+          if (termController.deleteTerm(termPk, termName, dispatch))
+            navigate('/')
         }}
       >
         <DeleteIcon />
