@@ -53,11 +53,8 @@ const Term: FC = () => {
       />
       <button
         onClick={() => {
-          courseController.addCourse(courseName, termPk)?.then(() => {
-            courseController.getCourses().then((res) => {
-              dispatch(setCourses(res.data))
-            })
-          })
+          courseController.addCourse(courseName, termPk, dispatch)
+          setCourseName('')
         }}
       >
         Add course
