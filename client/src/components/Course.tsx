@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import * as React from 'react'
+import { FC, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
   Card,
@@ -11,8 +12,12 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import BlockForm from './BlockForm'
 
-const Course = ({ coursePk }) => {
-  const courses = useSelector((state) => state.courses)
+interface Props {
+	coursePk: number;
+}
+
+const Course: FC<Props> = ({ coursePk }) => {
+  const courses = useSelector((state: any) => state.courses)
   const courseName = courses.value.filter((course) => {
     return course.course_pk === coursePk
   })[0].course_name
