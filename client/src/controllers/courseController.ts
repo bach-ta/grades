@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { Dispatch } from 'redux'
+import { AppDispatch } from '..'
 import { setCourses } from '../reducers/courses'
 
 export default class CourseController {
@@ -10,7 +10,7 @@ export default class CourseController {
   addCourse = (
     courseName: string,
     termFk: number,
-    dispatch: Dispatch
+    dispatch: AppDispatch
   ): void => {
     if (!courseName) {
       console.log('Error: courseName is empty')
