@@ -22,11 +22,11 @@ export default class TermController {
   }
 
   deleteTerm = (
-    termPk: number,
+    termPk: number, // TODO: #6 termPks: Array<number>
     termName: string,
     dispatch: AppDispatch
   ): boolean => {
-    // TODO: delete all courses associated with term
+    // TODO: delete all courses associated with term (#6)
     if (window.confirm(`Are you sure you want to remove ${termName} term?`)) {
       axios.delete(`http://localhost:3001/terms/delete/${termPk}`).then(() => {
         this.getTerms().then((res) => {

@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require('../index')
 
 router.get('/', (req, res) => {
-  db.query('SELECT * FROM terms', (err, result) => {
+  db.query('SELECT * FROM term ORDER BY term_pk DESC', (err, result) => {
     if (err) {
       console.log(err)
     } else {
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.post('/add', (req, res) => {
   const termName = req.body.termName
   db.query(
-    'INSERT INTO terms (term_name) VALUE (?)',
+    'INSERT INTO term (term_name) VALUE (?)',
     [termName],
     (err, result) => {
       if (err) {
@@ -29,7 +29,7 @@ router.post('/add', (req, res) => {
 
 router.delete('/delete/:termPk', (req, res) => {
   const termPk = req.params.termPk
-  db.query('DELETE FROM terms WHERE term_pk = ?', termPk, (err, result) => {
+  db.query('DELETE FROM term WHERE term_pk = ?', termPk, (err, result) => {
     if (err) {
       console.log(err)
     } else {
