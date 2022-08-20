@@ -1,20 +1,19 @@
 import * as React from 'react'
 import { FC, useState } from 'react'
 import axios from 'axios'
+import AuthController from '../controllers/authController'
+
+const authController = new AuthController()
 
 const Login: FC = () => {
   return (
     <button
       onClick={() => {
-        axios
-          .post('http://localhost:3001/auth/register', {
-            userEmail: 'test3@test.com',
-            username: 'test3',
-            password: 'testpw3',
-          })
-          .then((res) => {
-            console.log(res)
-          })
+        authController.registerUser({
+          userEmail: 'test3@test.com',
+          username: 'test3',
+          password: 'testpw3',
+        })
       }}
     >
       Login
