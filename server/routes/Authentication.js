@@ -9,28 +9,19 @@ const SALT = 17
 
 router.post('/register', (req, res) => {
   const { userEmail, username, password } = req.body
-  bcrypt
-    .hash(password, SALT)
-    .then((hashedPassword) => {
-      // #3 db query having error
-      db.query(
-        'INSERT INTO user (user_email, password) VALUE (?,?)',
-        [userEmail, hashedPassword],
-        (err, result) => {
-          if (err) {
-            console.log(err)
-          } else {
-            res.send(result)
-          }
+  bcrypt.hash(password, SALT).then((hashedPassword) => {
+    db.query(
+      'INSERT INTO user (user_email, password) VALUE (?,?)',
+      [userEmail, hashedPassword],
+      (err, result) => {
+        if (err) {
+          console.log(err)
+        } else {
+          res.send(result)
         }
-      )
-    })
-    .then(() => {
-      res.json('USER REGISTERED')
-    })
-    .catch((err) => {
-      if (err) console.log(err)
-    })
+      }
+    )
+  })
 })
 
 module.exports = router
