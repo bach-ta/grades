@@ -3,7 +3,6 @@ import { AppDispatch } from '..'
 
 type RegisterParams = {
   userEmail: string
-  username: string
   password: string
 }
 

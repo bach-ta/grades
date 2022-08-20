@@ -14,8 +14,8 @@ router.post('/register', (req, res) => {
     .then((hashedPassword) => {
       // #3 db query having error
       db.query(
-        'INSERT INTO user (user_email, username, password) VALUE (?,?,?)',
-        [userEmail, username, hashedPassword],
+        'INSERT INTO user (user_email, password) VALUE (?,?)',
+        [userEmail, hashedPassword],
         (err, result) => {
           if (err) {
             console.log(err)

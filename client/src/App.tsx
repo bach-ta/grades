@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './components/Home'
 import Term from './components/Term'
 import Login from './components/Login'
+import Register from './components/Register'
 import { fetchTerms } from './reducers/terms'
 import { fetchCourses } from './reducers/courses'
 import { fetchBlocks } from './reducers/blocks'
@@ -27,6 +28,7 @@ const App: FC = () => {
         <Route path="/home" element={<Home />} />
         {/* #3 to be updated */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/terms/:termPk" element={<Term />} />
       </Routes>
     </Router>
