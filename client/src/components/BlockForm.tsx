@@ -18,7 +18,7 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
     <Dialog onClose={handleClose} open={isOpen}>
       <DialogTitle>Add a Block</DialogTitle>
       <TextField
-        label="Block"
+        label="Block Name"
         variant="outlined"
         type="text"
         value={blockName}
@@ -51,7 +51,7 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
             blockName: blockName,
             blockWeight: blockWeight,
             blockCount: blockCount,
-            entries: JSON.stringify(new Array(blockCount).fill('')),
+            entries: JSON.stringify(new Array(Math.max(blockCount, 1)).fill('')),
           })
           if (addResult) {
             setBlockName('')
