@@ -2,6 +2,8 @@ import axios, { AxiosResponse } from 'axios'
 import { AppDispatch } from '..'
 import { setTerms } from '../reducers/terms'
 
+axios.defaults.withCredentials = true
+
 export default class TermController {
   getTerms = (): Promise<AxiosResponse> => {
     return axios.get('http://localhost:3001/terms')
