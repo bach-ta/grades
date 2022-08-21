@@ -9,7 +9,7 @@ const createTokens = (user) => {
 }
 
 const validateToken = (req, res, next) => {
-  console.log(req) // DEBUG
+  // console.log(req) // DEBUG
   const accessToken = req.cookies['access-token']
 
   if (!accessToken) {

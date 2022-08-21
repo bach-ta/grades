@@ -4,13 +4,19 @@ const db = require('../index')
 const { validateToken } = require('./Auth/JWT')
 
 router.get('/', validateToken, (req, res) => {
-  db.query('SELECT * FROM term ORDER BY term_pk DESC', (err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send(result)
+  const user = {} // #3 TODO: get logged in user
+
+  db.query(
+    'SELECT * FROM term WHERE owner_user_fk = ? ORDER BY term_pk DESC',
+    user.user_pk,
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(result)
+      }
     }
-  })
+  )
 })
 
 router.post('/add', (req, res) => {
