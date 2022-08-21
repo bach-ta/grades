@@ -4,11 +4,9 @@ const db = require('../index')
 const { validateToken } = require('./Auth/JWT')
 
 router.get('/', validateToken, (req, res) => {
-  const user = {} // #3 TODO: get logged in user
-
   db.query(
     'SELECT * FROM term WHERE owner_user_fk = ? ORDER BY term_pk DESC',
-    user.user_pk,
+    req.loggedInUserPk,
     (err, result) => {
       if (err) {
         console.log(err)
@@ -19,11 +17,11 @@ router.get('/', validateToken, (req, res) => {
   )
 })
 
-router.post('/add', (req, res) => {
+router.post('/add', validateToken, (req, res) => {
   const termName = req.body.termName
   db.query(
-    'INSERT INTO term (term_name) VALUE (?)',
-    [termName],
+    'INSERT INTO term (term_name, owner_user_fk) VALUE (?,?)',
+    [termName, req.loggedInUserPk],
     (err, result) => {
       if (err) {
         console.log(err)

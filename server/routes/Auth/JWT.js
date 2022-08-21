@@ -2,14 +2,13 @@ const { sign, verify } = require('jsonwebtoken')
 
 const createTokens = (user) => {
   const accessToken = sign(
-    { username: user.user_email, id: user.user_pk },
-    'myjwtsecret1234' // #15 TODO
+    { userEmail: user.user_email, userPk: user.user_pk },
+    'myjwtsecret1234' // #15 TODO: update key
   )
   return accessToken
 }
 
 const validateToken = (req, res, next) => {
-  // console.log(req) // DEBUG
   const accessToken = req.cookies['access-token']
 
   if (!accessToken) {
@@ -17,9 +16,10 @@ const validateToken = (req, res, next) => {
   }
 
   try {
-    const validToken = verify(accessToken, 'myjwtsecret1234') // #15 TODO
+    const validToken = verify(accessToken, 'myjwtsecret1234') // #15 TODO: update key
     if (validToken) {
       req.authenticated = true
+      req.loggedInUserPk = validToken.userPk
       return next()
     }
   } catch (err) {

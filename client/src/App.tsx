@@ -15,6 +15,9 @@ import { AppDispatch } from '.'
 const App: FC = () => {
   const dispatch = useDispatch<AppDispatch>()
 
+  // #3 TODO: accessing homepage but not authenticated -> redirect to login
+  //          accessing login but already authenticated -> redirect to home
+
   useEffect(() => {
     dispatch(fetchTerms())
     dispatch(fetchCourses())
