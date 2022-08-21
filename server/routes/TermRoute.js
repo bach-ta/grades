@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../index')
+const { validateToken } = require('./Auth/JWT')
 
-router.get('/', (req, res) => {
+router.get('/', validateToken, (req, res) => {
   db.query('SELECT * FROM term ORDER BY term_pk DESC', (err, result) => {
     if (err) {
       console.log(err)

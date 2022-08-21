@@ -21,7 +21,7 @@ module.exports = db
 const termRoute = require('./routes/TermRoute')
 const courseRoute = require('./routes/CourseRoute')
 const blockRoute = require('./routes/BlockRoute')
-const authRoute = require('./routes/Authentication')
+const authRoute = require('./routes/Auth/Authentication')
 app.use('/terms', termRoute)
 app.use('/courses', courseRoute)
 app.use('/blocks', blockRoute)
