@@ -29,7 +29,7 @@ export default function SignInSide({ handleSubmit }: AuthProps) {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundImage: 'url(https://bachta.me/images/uw_logo.png)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light'

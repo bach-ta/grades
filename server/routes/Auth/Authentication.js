@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require('../../index')
 
 const bcrypt = require('bcrypt')
-const { createTokens } = require('./JWT')
+const { createTokens, validateToken } = require('./JWT')
 
 const SALT = 17
 
@@ -29,6 +29,7 @@ router.post('/login', async (req, res) => {
   let user
 
   await new Promise((resolve, reject) => {
+    console.log('MySQL SELECT query') // #3 DEBUG
     db.query(
       'SELECT * FROM user WHERE user_email = ?',
       [userEmail],
@@ -44,10 +45,12 @@ router.post('/login', async (req, res) => {
     )
   })
 
+  console.log('async done') // #3 DEBUG
   if (!user) return res.status(400).json({ error: "User doesn't exist" })
 
   const dbPassword = user.password
   bcrypt.compare(password, dbPassword).then((match) => {
+    console.log('Bcrypt') // #3 DEBUG
     if (!match) {
       res.status(400).json({ error: 'Wrong password' })
     } else {
@@ -61,6 +64,10 @@ router.post('/login', async (req, res) => {
       res.json('Logged in successfully!')
     }
   })
+})
+
+router.get('/current_user', validateToken, (req, res) => {
+  res.status(200).json(req.loggedInUserPk)
 })
 
 module.exports = router

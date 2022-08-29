@@ -1,46 +1,46 @@
 import * as React from 'react'
-import { FC, useEffect } from 'react'
+import { FC, useState, useEffect } from 'react'
+import './App.css'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from './components/Home'
-import Term from './components/Term'
-import Login from './components/Login'
-import Register from './components/Register'
 import { fetchTerms } from './reducers/terms'
 import { fetchCourses } from './reducers/courses'
 import { fetchBlocks } from './reducers/blocks'
-import './App.css'
 import { AppDispatch } from '.'
+import AuthController from './controllers/authController'
+import Views from './components/Views'
+import { UserContext } from './contexts/UserContext'
 
-const getCurrentUser = () => {}
+const authController = new AuthController()
 
 const App: FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-
-  // #3 TODO: accessing homepage but not authenticated -> redirect to login
-  //          accessing login but already authenticated -> redirect to home
-
-  // #3 TODO: Fix bug: data are fetched before user login -> 400,
-  //          then user is redirected to home page and the 400 error is still showing,
-  //          so user needs to refresh to fetch data again
+  const [user, setUser] = useState({ loggedIn: false })
 
   useEffect(() => {
-    dispatch(fetchTerms())
-    dispatch(fetchCourses())
-    dispatch(fetchBlocks())
-  }, [dispatch])
+    onLoad()
+  }, [])
+
+  const onLoad = async () => {
+    try {
+      await authController.getCurrentUser()
+      setUser({ loggedIn: true })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    if (user.loggedIn) {
+      dispatch(fetchTerms())
+      dispatch(fetchCourses())
+      dispatch(fetchBlocks())
+    }
+  }, [user, dispatch])
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/*" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        {/* #3 to be updated */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/terms/:termPk" element={<Term />} />
-      </Routes>
-    </Router>
+    <UserContext.Provider value={[user, setUser]}>
+      <Views />
+    </UserContext.Provider>
   )
 }
 

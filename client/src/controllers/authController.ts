@@ -15,4 +15,8 @@ export default class AuthController {
   loginUser = (params: AuthControllerParams): Promise<AxiosResponse> => {
     return axios.post('http://localhost:3001/auth/login', params)
   }
+
+  getCurrentUser = (): Promise<AxiosResponse> => {
+    return axios.get('http://localhost:3001/auth/current_user')
+  }
 }
