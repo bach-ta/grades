@@ -11,4 +11,3 @@ export const UserContext = createContext<UserContext>([
   { loggedIn: false },
   () => null,
 ])
-// export const UserContext = createContext<UserContext | undefined>(undefined)

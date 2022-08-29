@@ -24,7 +24,7 @@ const Login: FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    const rememberMe = !!data.get('remember')
+    const rememberMe = !!data.get('remember') // #3 TODO: implement rememberMe
 
     authController
       .loginUser({
@@ -33,8 +33,7 @@ const Login: FC = () => {
         password: data.get('password')!.toString(),
       })
       .then(() => {
-        // #3 TODO: using .then(navigate) does not show loading tab icon
-        console.log(state?.from.pathname)
+        // #3 TODO: show loading page/tab icon, then move all these then/catch logics to authController
         setUser({ loggedIn: true })
         navigate(state.from ? state.from : '/')
       })
