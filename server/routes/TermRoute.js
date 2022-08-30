@@ -1,22 +1,27 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../index')
+const { validateToken } = require('./Auth/JWT')
 
-router.get('/', (req, res) => {
-  db.query('SELECT * FROM term ORDER BY term_pk DESC', (err, result) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.send(result)
+router.get('/', validateToken, (req, res) => {
+  db.query(
+    'SELECT * FROM term WHERE owner_user_fk = ? ORDER BY term_pk DESC',
+    req.loggedInUserPk,
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(result)
+      }
     }
-  })
+  )
 })
 
-router.post('/add', (req, res) => {
+router.post('/add', validateToken, (req, res) => {
   const termName = req.body.termName
   db.query(
-    'INSERT INTO term (term_name) VALUE (?)',
-    [termName],
+    'INSERT INTO term (term_name, owner_user_fk) VALUE (?,?)',
+    [termName, req.loggedInUserPk],
     (err, result) => {
       if (err) {
         console.log(err)

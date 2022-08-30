@@ -1,32 +1,46 @@
 import * as React from 'react'
-import { FC, useEffect } from 'react'
+import { FC, useState, useEffect } from 'react'
+import './App.css'
 import { useDispatch } from 'react-redux'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import Home from './components/Home'
-import Term from './components/Term'
 import { fetchTerms } from './reducers/terms'
 import { fetchCourses } from './reducers/courses'
 import { fetchBlocks } from './reducers/blocks'
-import './App.css'
 import { AppDispatch } from '.'
+import AuthController from './controllers/authController'
+import Views from './components/Views'
+import { UserContext } from './contexts/UserContext'
+
+const authController = new AuthController()
 
 const App: FC = () => {
   const dispatch = useDispatch<AppDispatch>()
+  const [user, setUser] = useState({ loggedIn: false })
 
   useEffect(() => {
-    dispatch(fetchTerms())
-    dispatch(fetchCourses())
-    dispatch(fetchBlocks())
-  }, [dispatch])
+    onLoad()
+  }, [])
+
+  const onLoad = async () => {
+    try {
+      await authController.getCurrentUser()
+      setUser({ loggedIn: true })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    if (user.loggedIn) {
+      dispatch(fetchTerms())
+      dispatch(fetchCourses())
+      dispatch(fetchBlocks())
+    }
+  }, [user, dispatch])
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/*" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/terms/:termPk" element={<Term />} />
-      </Routes>
-    </Router>
+    <UserContext.Provider value={[user, setUser]}>
+      <Views />
+    </UserContext.Provider>
   )
 }
 
