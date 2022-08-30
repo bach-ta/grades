@@ -19,4 +19,8 @@ export default class AuthController {
   getCurrentUser = (): Promise<AxiosResponse> => {
     return axios.get('http://localhost:3001/auth/current_user')
   }
+
+  logout = (): Promise<AxiosResponse> => {
+    return axios.get('http://localhost:3001/auth/logout')
+  }
 }

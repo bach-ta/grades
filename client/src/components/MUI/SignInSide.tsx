@@ -90,7 +90,7 @@ export default function SignInSide({ handleSubmit }: AuthProps) {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#12 TODO: add link" variant="body2">
+                  <Link href="#17 TODO: add link" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>

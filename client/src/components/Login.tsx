@@ -24,7 +24,7 @@ const Login: FC = () => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    const rememberMe = !!data.get('remember') // #3 TODO: implement rememberMe
+    const rememberMe = !!data.get('remember') // #17 TODO: implement rememberMe
 
     authController
       .loginUser({
@@ -33,12 +33,13 @@ const Login: FC = () => {
         password: data.get('password')!.toString(),
       })
       .then(() => {
-        // #3 TODO: show loading page/tab icon, then move all these then/catch logics to authController
+        // #17 TODO: show loading page/tab icon, then move all these then/catch logics to authController
         setUser({ loggedIn: true })
         navigate(state.from ? state.from : '/')
       })
-      .catch(() => {
-        // #3 TODO: handle unsuccessful login attempts
+      .catch((err) => {
+        // #17 TODO: handle unsuccessful login attempts
+        alert(err)
       })
   }
 

@@ -12,6 +12,9 @@ import Button from '@mui/material/Button'
 import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import AdbIcon from '@mui/icons-material/Adb'
+import AuthController from '../../controllers/authController'
+
+const authController = new AuthController()
 
 const pages = [
   { text: 'Home', path: '/' },
@@ -20,11 +23,13 @@ const pages = [
 const settings = [
   {
     text: 'Account',
-    handleClick: () => null,
+    handleClick: () => null, // #17 TODO: profile page
   },
   {
     text: 'Logout',
-    handleClick: () => null,
+    handleClick: () => {
+      authController.logout()
+    },
   },
 ]
 const APP_NAME = 'Grade Calculator'

@@ -70,4 +70,9 @@ router.get('/current_user', validateToken, (req, res) => {
   res.status(200).json(req.loggedInUserPk)
 })
 
+router.get('/logout', (req, res) => {
+  // #17 TODO: implement logout function (destroy/invalidate JWT)
+  res.cookie('access-token', '', { maxAge: 1 })
+})
+
 module.exports = router
