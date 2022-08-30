@@ -1,9 +1,10 @@
 ## File Structure
+
 ```
 client
 │   package.json
 │   tsconfig.json
-│   
+│
 └───public
 │       index.html
 │
@@ -12,26 +13,46 @@ client
     │   App.tsx
     │
     └───components
+    │       MUI
     │       Home.tsx
     │       Term.tsx
     │       Course.tsx
     │       BlockForm.tsx
+    │       Login.tsx
+    │       Register.tsx
+    │       Views.tsx
+    │       ProtectedRoutes.tsx
+    │       types.ts
     │
     └───controllers
-    │       termController.ts
+    │       authController.ts
+    │       blockController.ts
     │       courseController.ts
+    │       termController.ts
     │
     └───reducers
-            terms.ts
+            blocks.ts
             courses.ts
+            terms.ts
 ```
 
 ```
 server
 │   package.json
 │   index.js
-│   
+│
 └───routes
-        TermRoute.ts
-        CourseRoute.ts
+│   │   BlockRoute.ts
+│   │   CourseRoute.ts
+│   │   TermRoute.ts
+│   │
+│   └───Auth
+│           Authentication.js
+│           JWT.js
+│
+└───sql
+        block.sql
+        course.sql
+        term.sql
+        user.sql
 ```
