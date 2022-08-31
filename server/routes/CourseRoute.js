@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const db = require('../index')
+const { validateToken } = require('./Auth/JWT')
+
+router.use('/', validateToken)
 
 router.get('/', (req, res) => {
   db.query('SELECT * FROM course', (err, result) => {
