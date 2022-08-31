@@ -16,10 +16,10 @@ router.get('/', (req, res) => {
 })
 
 router.post('/add', (req, res) => {
-  const { blockName, blockWeight, courseFk, entries } = req.body
+  const { blockName, blockWeight, courseFk } = req.body
   db.query(
-    'INSERT INTO block (block_name, block_weight, course_fk, entries) VALUE (?,?,?,?)',
-    [blockName, blockWeight, courseFk, entries],
+    'INSERT INTO block (block_name, block_weight, course_fk) VALUE (?,?,?)',
+    [blockName, blockWeight, courseFk],
     (err, result) => {
       if (err) {
         console.log(err)

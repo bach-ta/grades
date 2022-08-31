@@ -7,12 +7,11 @@ interface Props {
     block_pk: number
     block_weight: number
     course_fk: number
-    entries: string
   }
 }
 
 const Block: FC<Props> = ({ block }) => {
-  const { block_name, block_pk, block_weight, course_fk, entries } = block
+  const { block_name, block_pk, block_weight, course_fk } = block
 
   return (
     <div>

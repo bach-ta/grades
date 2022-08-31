@@ -40,7 +40,6 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
           const addResult = addBlock({
             blockName: blockName,
             blockWeight: blockWeight,
-            entries: JSON.stringify(new Array(1).fill('')),
           })
           if (addResult) {
             setBlockName('')
