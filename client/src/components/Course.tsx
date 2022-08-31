@@ -12,6 +12,7 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import BlockForm from './BlockForm'
 import BlockController from '../controllers/blockController'
+import Block from './Block'
 
 interface Props {
   coursePk: number
@@ -48,7 +49,7 @@ const Course: FC<Props> = ({ coursePk }) => {
             </IconButton>
           </Tooltip>
           {blocks.map((block) => {
-            return <p key={block.block_pk}>{block.block_name}</p>
+            return <Block key={block.block_pk} block={block} />
           })}
         </CardContent>
         <BlockForm

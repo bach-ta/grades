@@ -13,8 +13,8 @@ export default class BlockController {
       alert('Block name cannot be empty')
       return false
     }
-    if (params.blockWeight <= 0 || params.blockCount <= 0) {
-      alert('Block weight and number of entries must be a positive integer')
+    if (params.blockWeight <= 0) {
+      alert('Block weight must be a positive integer')
       return false
     }
     axios.post('http://localhost:3001/blocks/add', params).then(() => {

@@ -12,7 +12,6 @@ interface Props {
 const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
   const [blockName, setBlockName] = useState('')
   const [blockWeight, setWeight] = useState(0)
-  const [blockCount, setCount] = useState(0)
 
   return (
     <Dialog onClose={handleClose} open={isOpen}>
@@ -35,28 +34,17 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
           setWeight(parseInt(event.target.value))
         }}
       />
-      <TextField
-        label="Number of entries"
-        variant="outlined"
-        type="number"
-        value={blockCount}
-        onChange={(event) => {
-          setCount(parseInt(event.target.value))
-        }}
-      />
       <Button
         variant="contained"
         onClick={() => {
           const addResult = addBlock({
             blockName: blockName,
             blockWeight: blockWeight,
-            blockCount: blockCount,
-            entries: JSON.stringify(new Array(Math.max(blockCount, 1)).fill('')),
+            entries: JSON.stringify(new Array(1).fill('')),
           })
           if (addResult) {
             setBlockName('')
             setWeight(0)
-            setCount(0)
             handleClose()
           }
         }}
