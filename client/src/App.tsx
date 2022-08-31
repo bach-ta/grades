@@ -14,7 +14,9 @@ const authController = new AuthController()
 
 const App: FC = () => {
   const dispatch = useDispatch<AppDispatch>()
-  const [user, setUser] = useState({ loggedIn: false })
+  const [user, setUser] = useState<{ loggedIn: boolean | undefined }>({
+    loggedIn: undefined,
+  })
 
   useEffect(() => {
     onLoad()
@@ -26,6 +28,7 @@ const App: FC = () => {
       setUser({ loggedIn: true })
     } catch (err) {
       console.log(err)
+      setUser({ loggedIn: false })
     }
   }
 
@@ -39,7 +42,7 @@ const App: FC = () => {
 
   return (
     <UserContext.Provider value={[user, setUser]}>
-      <Views />
+      {user.loggedIn !== undefined ? <Views /> : <></>}
     </UserContext.Provider>
   )
 }

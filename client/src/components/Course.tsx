@@ -48,7 +48,7 @@ const Course: FC<Props> = ({ coursePk }) => {
             </IconButton>
           </Tooltip>
           {blocks.map((block) => {
-            return <p key={block.block_fk}>{block.block_name}</p>
+            return <p key={block.block_pk}>{block.block_name}</p>
           })}
         </CardContent>
         <BlockForm
