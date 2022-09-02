@@ -18,11 +18,39 @@ export default class BlockController {
       return false
     }
     axios.post('http://localhost:3001/blocks/add', params).then(() => {
-      console.log(`add block ${params.blockName} successfully`)
+      console.log(`Add block ${params.blockName} successfully`)
       this.getBlocks().then((res) => {
         dispatch(setBlocks(res.data))
       })
     })
+    return true
+  }
+
+  updateEntries = (
+    entryArray: Array<number>,
+    blockPk: number,
+    dispatch: AppDispatch
+  ): boolean => {
+    if (entryArray.filter((entry) => entry < 0)[0]) {
+      alert('Error: negative entry')
+      return false
+    }
+    const entries: string = JSON.stringify(entryArray)
+
+    axios
+      .put('http://localhost:3001/blocks/update_entries', {
+        entries: entries,
+        blockPk: blockPk,
+      })
+      .then(() => {
+        console.log(`Update entries successfully`)
+        this.getBlocks().then((res) => {
+          dispatch(setBlocks(res.data))
+        })
+      })
+      .catch((err) => {
+        throw err
+      })
     return true
   }
 }

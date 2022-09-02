@@ -1,6 +1,10 @@
 import * as React from 'react'
-import { FC } from 'react'
-import { Card, CardContent, Typography } from '@mui/material'
+import { FC, useState } from 'react'
+import { Card, CardContent, Typography, TextField, Button } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import BlockController from '../controllers/blockController'
+
+const blockController = new BlockController()
 
 interface Props {
   block: {
@@ -23,6 +27,8 @@ const Block: FC<Props> = ({ block }) => {
     block_average,
   } = block
 
+  const dispatch = useDispatch()
+  const [newEntry, setNewEntry] = useState<string>('')
   const entryArray = JSON.parse(entries)
 
   return (
@@ -37,6 +43,30 @@ const Block: FC<Props> = ({ block }) => {
         {entryArray.map((entry, idx) => {
           return <Typography key={idx}>{entry}</Typography>
         })}
+        <TextField
+          label="Add a new entry"
+          placeholder="100"
+          type="text"
+          value={newEntry}
+          onChange={(event) => {
+            setNewEntry(event.target.value)
+          }}
+        />
+        <Button
+          variant="contained"
+          onClick={() => {
+            if (newEntry == '') return
+            blockController.updateEntries(
+              [...entryArray, parseFloat(newEntry)],
+              block_pk,
+              dispatch
+            )
+            setNewEntry('')
+          }}
+        >
+          Add
+        </Button>
+        {/*  */}
       </CardContent>
     </Card>
   )

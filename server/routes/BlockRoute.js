@@ -30,4 +30,19 @@ router.post('/add', (req, res) => {
   )
 })
 
+router.put('/update_entries', (req, res) => {
+  const { entries, blockPk } = req.body
+  db.query(
+    'UPDATE block SET entries = ? WHERE block_pk = ?',
+    [entries, blockPk],
+    (err, result) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
 module.exports = router

@@ -1,9 +1,11 @@
+DROP TABLE IF EXISTS `block`;
+
 CREATE TABLE `block` (
   `block_pk` INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
   `block_name` VARCHAR(255) NOT NULL,
   `block_weight` INT UNSIGNED NOT NULL,
   `course_fk` INT UNSIGNED DEFAULT NULL,
-  `entries` JSON NOT NULL DEFAULT ('[""]'),
+  `entries` JSON NOT NULL DEFAULT ('[]'),
   `block_average` DECIMAL(5,2) DEFAULT NULL,
   `dt_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`block_pk`),
