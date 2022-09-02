@@ -1,6 +1,9 @@
+DROP TABLE IF EXISTS `course`;
+
 CREATE TABLE `course` (
   `course_pk` INT UNSIGNED NOT NULL UNIQUE AUTO_INCREMENT,
   `course_name` VARCHAR(255) NOT NULL,
+  `course_average` DECIMAL(5,2) DEFAULT NULL,
   `term_fk` INT UNSIGNED DEFAULT NULL,
   `dt_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`course_pk`),
