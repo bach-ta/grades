@@ -10,8 +10,8 @@ interface Props {
 }
 
 const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
-  const [blockName, setBlockName] = useState('')
-  const [blockWeight, setWeight] = useState(0)
+  const [blockName, setBlockName] = useState<string>('')
+  const [blockWeight, setWeight] = useState<string>('')
 
   return (
     <Dialog onClose={handleClose} open={isOpen}>
@@ -31,7 +31,7 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
         type="number"
         value={blockWeight}
         onChange={(event) => {
-          setWeight(parseInt(event.target.value))
+          setWeight(event.target.value)
         }}
       />
       <Button
@@ -39,11 +39,11 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
         onClick={() => {
           const addResult = addBlock({
             blockName: blockName,
-            blockWeight: blockWeight,
+            blockWeight: parseInt(blockWeight),
           })
           if (addResult) {
             setBlockName('')
-            setWeight(0)
+            setWeight('')
             handleClose()
           }
         }}
