@@ -4,6 +4,7 @@ CREATE TABLE `block` (
   `block_weight` INT UNSIGNED NOT NULL,
   `course_fk` INT UNSIGNED DEFAULT NULL,
   `entries` JSON NOT NULL DEFAULT ('[""]'),
+  `block_average` DECIMAL(5,2) DEFAULT NULL,
   `dt_created` DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`block_pk`),
   CONSTRAINT `FK_block_course` FOREIGN KEY (`course_fk`) REFERENCES `course` (`course_pk`) ON DELETE CASCADE ON UPDATE CASCADE
