@@ -32,4 +32,17 @@ export default class CourseController {
         })
       })
   }
+
+  updateCourseAverage = async (coursePk: number, dispatch: AppDispatch) => {
+    try {
+      await axios.put('http://localhost:3001/courses/update_average', {
+        coursePk: coursePk,
+      })
+      console.log(`Update course average successfully`)
+      const getCoursesResponse = await this.getCourses()
+      dispatch(setCourses(getCoursesResponse.data))
+    } catch (err) {
+      throw err
+    }
+  }
 }

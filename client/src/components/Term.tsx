@@ -30,17 +30,20 @@ const Term: FC = () => {
     return <p>{terms.status}</p>
   }
 
-  const termName = terms.value.filter((term) => {
+  const term = terms.value.filter((term) => {
     return term.term_pk === termPk
-  })[0]?.term_name
+  })[0]
 
-  if (!termName) {
+  if (!term) {
     return <p>{`No term matches ID ${termPk}`}</p>
   }
+
+  const { term_name: termName, term_average: termAverage } = term
 
   return (
     <>
       <Typography>{termName}</Typography>
+      <Typography>Term GPA: {termAverage}</Typography>
       <label>Add a course: </label>
       <input
         placeholder="e.g. MATH 239"

@@ -38,4 +38,20 @@ export default class TermController {
     }
     return false
   }
+
+  updateTermAverageByCourse = async (
+    coursePk: number,
+    dispatch: AppDispatch
+  ) => {
+    try {
+      await axios.put('http://localhost:3001/terms/update_average', {
+        coursePk: coursePk,
+      })
+      console.log(`Update term average successfully`)
+      const getTermsResponse = await this.getTerms()
+      dispatch(setTerms(getTermsResponse.data))
+    } catch (err) {
+      throw err
+    }
+  }
 }

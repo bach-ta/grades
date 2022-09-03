@@ -2,7 +2,7 @@ import * as React from 'react'
 import { createContext } from 'react'
 
 export type User = {
-  loggedIn: boolean
+  loggedIn: boolean | undefined
 }
 
 type UserContext = [User, React.Dispatch<React.SetStateAction<User>>]
