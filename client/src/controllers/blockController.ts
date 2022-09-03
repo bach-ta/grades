@@ -3,6 +3,7 @@ import { AppDispatch } from '..'
 import { BlockParams2 } from '../components/types'
 import { setBlocks } from '../reducers/blocks'
 import CourseController from './courseController'
+import TermController from './termController'
 
 export default class BlockController {
   getBlocks = (): Promise<AxiosResponse> => {
@@ -52,6 +53,10 @@ export default class BlockController {
       // Update course average
       const courseController = new CourseController()
       await courseController.updateCourseAverage(courseFk, dispatch)
+
+      // Update term average
+      const termController = new TermController()
+      await termController.updateTermAverageByCourse(courseFk, dispatch)
     } catch (err) {
       throw err
     }

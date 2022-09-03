@@ -42,7 +42,7 @@ const App: FC = () => {
 
   return (
     <UserContext.Provider value={[user, setUser]}>
-      {user.loggedIn !== undefined ? <Views /> : <></>}
+      {user.loggedIn !== undefined && <Views />}
     </UserContext.Provider>
   )
 }

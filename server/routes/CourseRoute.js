@@ -37,7 +37,7 @@ router.put('/update_average', (req, res) => {
     ` UPDATE course,
         (SELECT CAST(100 * SUM(block_average) / SUM(block_weight) AS DECIMAL(5,2))
           AS course_average
-          FROM block WHERE course_fk = ?
+          FROM block WHERE course_fk = ? AND block_average IS NOT NULL
         ) AS result
       SET course.course_average = result.course_average
       WHERE course_pk = ?;`,
