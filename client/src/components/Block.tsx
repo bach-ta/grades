@@ -19,12 +19,12 @@ interface Props {
 
 const Block: FC<Props> = ({ block }) => {
   const {
-    block_name,
-    block_pk,
-    block_weight,
-    course_fk,
+    block_name: blockName,
+    block_pk: blockPk,
+    block_weight: blockWeight,
+    course_fk: courseFk,
     entries,
-    block_average,
+    block_average: blockAverage,
   } = block
 
   const dispatch = useDispatch()
@@ -32,13 +32,13 @@ const Block: FC<Props> = ({ block }) => {
   const entryArray = JSON.parse(entries)
 
   return (
-    <Card style={{ backgroundColor: 'white' }}>
+    <Card style={{ backgroundColor: 'white' }} sx={{ m: 2 }}>
       <CardContent>
         <Typography variant="h5" component="div">
-          {block_name}
+          {blockName}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Weight: {block_average} / {block_weight}
+          Weight: {blockAverage} / {blockWeight}
         </Typography>
         {entryArray.map((entry, idx) => {
           return <Typography key={idx}>{entry}</Typography>
@@ -54,11 +54,12 @@ const Block: FC<Props> = ({ block }) => {
         />
         <Button
           variant="contained"
-          onClick={() => {
+          onClick={async () => {
             if (newEntry == '') return
-            blockController.updateEntries(
+            await blockController.updateEntries(
               [...entryArray, parseFloat(newEntry)],
-              block_pk,
+              blockPk,
+              courseFk,
               dispatch
             )
             setNewEntry('')

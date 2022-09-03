@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios'
 import { AppDispatch } from '..'
 import { BlockParams2 } from '../components/types'
 import { setBlocks } from '../reducers/blocks'
+import CourseController from './courseController'
 
 export default class BlockController {
   getBlocks = (): Promise<AxiosResponse> => {
@@ -26,31 +27,33 @@ export default class BlockController {
     return true
   }
 
-  updateEntries = (
+  updateEntries = async (
     entryArray: Array<number>,
     blockPk: number,
+    courseFk: number,
     dispatch: AppDispatch
-  ): boolean => {
+  ) => {
     if (entryArray.filter((entry) => entry < 0)[0]) {
       alert('Error: negative entry')
-      return false
+      throw 'Error: negative entry'
     }
     const entries: string = JSON.stringify(entryArray)
 
-    axios
-      .put('http://localhost:3001/blocks/update_entries', {
+    try {
+      // Update entries
+      await axios.put('http://localhost:3001/blocks/update_entries', {
         entries: entries,
         blockPk: blockPk,
       })
-      .then(() => {
-        console.log(`Update entries successfully`)
-        this.getBlocks().then((res) => {
-          dispatch(setBlocks(res.data))
-        })
-      })
-      .catch((err) => {
-        throw err
-      })
-    return true
+      console.log(`Update entries successfully`)
+      const getBlocksResponse = await this.getBlocks()
+      dispatch(setBlocks(getBlocksResponse.data))
+
+      // Update course average
+      const courseController = new CourseController()
+      await courseController.updateCourseAverage(courseFk, dispatch)
+    } catch (err) {
+      throw err
+    }
   }
 }

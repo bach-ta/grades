@@ -23,9 +23,10 @@ const blockController = new BlockController()
 const Course: FC<Props> = ({ coursePk }) => {
   const dispatch = useDispatch()
   const courses = useSelector((state: any) => state.courses)
-  const courseName = courses.value.filter((course) => {
+  const course = courses.value.filter((course) => {
     return course.course_pk === coursePk
-  })[0].course_name
+  })[0]
+  const { course_name: courseName, course_average: courseAverage } = course
 
   const blocks = useSelector((state: any) => state.blocks.value).filter(
     (block) => {
@@ -40,9 +41,10 @@ const Course: FC<Props> = ({ coursePk }) => {
 
   return (
     <Grid item xs={12}>
-      <Card style={{ backgroundColor: '#c5cae9' }}>
+      <Card style={{ backgroundColor: '#c5cae9' }} sx={{ m: 2 }}>
         <CardContent>
           <Typography> {courseName} </Typography>
+          <Typography> {courseAverage} </Typography>
           <Tooltip title="Add a Block">
             <IconButton onClick={toggleOpen}>
               <AddIcon />
