@@ -1,3 +1,5 @@
+// SOURCE: https://github.com/mui/material-ui/blob/v5.10.1/docs/data/material/getting-started/templates/sign-in-side/SignInSide.tsx
+
 import * as React from 'react'
 import Typography from '@mui/material/Typography'
 import Link from '@mui/material/Link'

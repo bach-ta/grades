@@ -1,4 +1,4 @@
-// Source: https://github.com/mui/material-ui/blob/v5.10.1/docs/data/material/getting-started/templates/sign-up/SignUp.tsx
+// SOURCE: https://github.com/mui/material-ui/blob/v5.10.1/docs/data/material/getting-started/templates/sign-up/SignUp.tsx
 
 import * as React from 'react'
 import Avatar from '@mui/material/Avatar'
