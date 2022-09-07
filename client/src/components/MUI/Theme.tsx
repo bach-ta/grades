@@ -1,14 +1,15 @@
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
 import { ThemeOptions } from '@mui/material'
+// import RobotoSlabTTF from './RobotoSlab-VariableFont_wght.ttf'
 
 const themeOptions: ThemeOptions = {
   palette: {
     mode: 'dark',
     primary: {
-      main: '#6735a0',
+      main: '#b5926d',
     },
     secondary: {
-      main: '#f48fb1',
+      main: '#4a6741',
     },
     background: {
       default: '#212121',

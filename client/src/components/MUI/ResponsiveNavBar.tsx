@@ -34,7 +34,7 @@ const settings = [
     },
   },
 ]
-const APP_NAME = 'Grade Calculator'
+const APP_NAME = 'GPA Calculator'
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
