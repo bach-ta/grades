@@ -42,8 +42,21 @@ const Term: FC = () => {
 
   return (
     <>
-      <Typography>{termName}</Typography>
+      <Typography variant="h5">{termName}</Typography>
       <Typography>Term GPA: {termAverage}</Typography>
+      <IconButton
+        onClick={() => {
+          if (termController.deleteTerm(termPk, termName, dispatch))
+            navigate('/')
+        }}
+      >
+        <DeleteIcon />
+      </IconButton>
+
+      {courses.map((course) => {
+        return <Course key={course.course_pk} coursePk={course.course_pk} />
+      })}
+
       <label>Add a course: </label>
       <input
         placeholder="e.g. MATH 239"
@@ -61,18 +74,6 @@ const Term: FC = () => {
       >
         Add course
       </button>
-      <IconButton
-        onClick={() => {
-          if (termController.deleteTerm(termPk, termName, dispatch))
-            navigate('/')
-        }}
-      >
-        <DeleteIcon />
-      </IconButton>
-
-      {courses.map((course) => {
-        return <Course key={course.course_pk} coursePk={course.course_pk} />
-      })}
     </>
   )
 }

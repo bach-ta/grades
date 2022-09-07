@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import TermController from '../controllers/termController'
 import { experimentalStyled as styled } from '@mui/material/styles'
-import { TextField, Button, Box, Paper, Grid } from '@mui/material'
+import { TextField, Button, Box, Paper, Grid, Typography } from '@mui/material'
 
 const termController = new TermController()
 
@@ -23,7 +23,7 @@ const Home: FC = () => {
   const terms = useSelector((state: any) => state.terms)
 
   return (
-    <div className="Home">
+    <Box>
       <TextField
         label="Add a term"
         placeholder="e.g. Fall 2022, 3A,..."
@@ -53,16 +53,20 @@ const Home: FC = () => {
             {terms.value.map((term, index) => (
               <Grid item xs={2} sm={4} md={4} key={index}>
                 <GridItem>
-                  <Link to={`/terms/${term.term_pk}`}>{term.term_name}</Link>
+                  <Typography>
+                    <Link to={`/terms/${term.term_pk}`} color="inherit">
+                      {term.term_name}
+                    </Link>
+                  </Typography>
                 </GridItem>
               </Grid>
             ))}
           </Grid>
         </Box>
       ) : (
-        <p>{terms.error}</p>
+        <Typography>{terms.error}</Typography>
       )}
-    </div>
+    </Box>
   )
 }
 
