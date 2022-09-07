@@ -2,11 +2,11 @@ import * as React from 'react'
 import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Typography, IconButton } from '@mui/material'
-import DeleteIcon from '@mui/icons-material/Delete'
+import { Typography, Button, TextField } from '@mui/material'
 import TermController from '../controllers/termController'
 import CourseController from '../controllers/courseController'
 import Course from './Course'
+import { Navigate } from 'react-router-dom'
 
 const termController = new TermController()
 const courseController = new CourseController()
@@ -35,7 +35,8 @@ const Term: FC = () => {
   })[0]
 
   if (!term) {
-    return <p>{`No term matches ID ${termPk}`}</p>
+    console.log(`No term matches ID ${termPk}`)
+    return <Navigate to="/" replace />
   }
 
   const { term_name: termName, term_average: termAverage } = term
@@ -44,21 +45,12 @@ const Term: FC = () => {
     <>
       <Typography variant="h5">{termName}</Typography>
       <Typography>Term GPA: {termAverage}</Typography>
-      <IconButton
-        onClick={() => {
-          if (termController.deleteTerm(termPk, termName, dispatch))
-            navigate('/')
-        }}
-      >
-        <DeleteIcon />
-      </IconButton>
-
       {courses.map((course) => {
         return <Course key={course.course_pk} coursePk={course.course_pk} />
       })}
 
-      <label>Add a course: </label>
-      <input
+      <TextField
+        label="Add a course"
         placeholder="e.g. MATH 239"
         type="text"
         value={courseName}
@@ -66,14 +58,26 @@ const Term: FC = () => {
           setCourseName(event.target.value)
         }}
       />
-      <button
+      <Button
+        variant="contained"
         onClick={() => {
           courseController.addCourse(courseName, termPk, dispatch)
           setCourseName('')
         }}
       >
-        Add course
-      </button>
+        Add
+      </Button>
+
+      <Button
+        variant="outlined"
+        color="error"
+        onClick={() => {
+          if (termController.deleteTerm(termPk, termName, dispatch))
+            navigate('/')
+        }}
+      >
+        Delete term
+      </Button>
     </>
   )
 }

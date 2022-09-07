@@ -4,7 +4,15 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import TermController from '../controllers/termController'
 import { experimentalStyled as styled } from '@mui/material/styles'
-import { TextField, Button, Box, Paper, Grid, Typography } from '@mui/material'
+import {
+  TextField,
+  Button,
+  Box,
+  Paper,
+  Grid,
+  Typography,
+  Container,
+} from '@mui/material'
 
 const termController = new TermController()
 
@@ -23,7 +31,32 @@ const Home: FC = () => {
   const terms = useSelector((state: any) => state.terms)
 
   return (
-    <Box>
+    <Container maxWidth="lg" sx={{ mt: 4 }}>
+      {terms.status === 'succeeded' ? (
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 3 }}
+            columns={{ xs: 2, sm: 8, md: 12 }}
+          >
+            {terms.value.map((term, index) => (
+              <Grid item xs={2} sm={4} md={4} key={index}>
+                <GridItem>
+                  <Link
+                    to={`/terms/${term.term_pk}`}
+                    style={{ color: 'inherit', textDecoration: 'inherit' }}
+                  >
+                    <Typography>{term.term_name}</Typography>
+                  </Link>
+                </GridItem>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      ) : (
+        <Typography>{terms.error}</Typography>
+      )}
+
       <TextField
         label="Add a term"
         placeholder="e.g. Fall 2022, 3A,..."
@@ -42,31 +75,7 @@ const Home: FC = () => {
       >
         Add
       </Button>
-
-      {terms.status === 'succeeded' ? (
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid
-            container
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-          >
-            {terms.value.map((term, index) => (
-              <Grid item xs={2} sm={4} md={4} key={index}>
-                <GridItem>
-                  <Typography>
-                    <Link to={`/terms/${term.term_pk}`} color="inherit">
-                      {term.term_name}
-                    </Link>
-                  </Typography>
-                </GridItem>
-              </Grid>
-            ))}
-          </Grid>
-        </Box>
-      ) : (
-        <Typography>{terms.error}</Typography>
-      )}
-    </Box>
+    </Container>
   )
 }
 

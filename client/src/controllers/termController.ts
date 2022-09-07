@@ -28,7 +28,9 @@ export default class TermController {
     termName: string,
     dispatch: AppDispatch
   ): boolean => {
-    if (window.confirm(`Are you sure you want to remove ${termName} term?`)) {
+    if (
+      window.confirm(`Are you sure you want to remove \"${termName}\" term?`)
+    ) {
       axios.delete(`http://localhost:3001/terms/delete/${termPk}`).then(() => {
         this.getTerms().then((res) => {
           dispatch(setTerms(res.data))
