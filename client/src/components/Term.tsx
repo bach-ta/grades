@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Typography, Button, TextField } from '@mui/material'
+import { Typography, Button, TextField, Container, Box } from '@mui/material'
 import TermController from '../controllers/termController'
 import CourseController from '../controllers/courseController'
 import Course from './Course'
@@ -42,43 +42,61 @@ const Term: FC = () => {
   const { term_name: termName, term_average: termAverage } = term
 
   return (
-    <>
+    <Container maxWidth="lg" sx={{ mt: 4, width: 4 / 5 }}>
       <Typography variant="h5">{termName}</Typography>
       <Typography>Term GPA: {termAverage}</Typography>
+      <br />
       {courses.map((course) => {
         return <Course key={course.course_pk} coursePk={course.course_pk} />
       })}
 
-      <TextField
-        label="Add a course"
-        placeholder="e.g. MATH 239"
-        type="text"
-        value={courseName}
-        onChange={(event) => {
-          setCourseName(event.target.value)
-        }}
-      />
-      <Button
-        variant="contained"
-        onClick={() => {
-          courseController.addCourse(courseName, termPk, dispatch)
-          setCourseName('')
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          mt: 5,
         }}
       >
-        Add
-      </Button>
-
-      <Button
-        variant="outlined"
-        color="error"
-        onClick={() => {
-          if (termController.deleteTerm(termPk, termName, dispatch))
-            navigate('/')
-        }}
-      >
-        Delete term
-      </Button>
-    </>
+        <Box
+          component="form"
+          onSubmit={() => {
+            courseController.addCourse(courseName, termPk, dispatch)
+            setCourseName('')
+          }}
+          sx={{
+            width: 3 / 10,
+            display: 'flex',
+            justifyContent: 'flex-start',
+          }}
+        >
+          <TextField
+            hiddenLabel
+            placeholder="Add a course"
+            type="text"
+            variant="filled"
+            size="small"
+            value={courseName}
+            onChange={(event) => {
+              setCourseName(event.target.value)
+            }}
+            sx={{ mr: 2 }}
+          />
+          <Button type="submit" variant="contained">
+            Add
+          </Button>
+        </Box>
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => {
+            if (termController.deleteTerm(termPk, termName, dispatch))
+              navigate('/')
+          }}
+        >
+          Delete term
+        </Button>
+      </Box>
+    </Container>
   )
 }
 

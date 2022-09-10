@@ -44,7 +44,7 @@ const Course: FC<Props> = ({ coursePk }) => {
   }
 
   return (
-    <Accordion defaultExpanded={false} sx={{ m: 2 }}>
+    <Accordion defaultExpanded={false} sx={{ my: 2 }}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"

@@ -31,7 +31,7 @@ const Home: FC = () => {
   const terms = useSelector((state: any) => state.terms)
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4 }}>
+    <Container maxWidth="lg" sx={{ mt: 4, width: 4 / 5 }}>
       {terms.status === 'succeeded' ? (
         <Box sx={{ flexGrow: 1 }}>
           <Grid
@@ -57,24 +57,35 @@ const Home: FC = () => {
         <Typography>{terms.error}</Typography>
       )}
 
-      <TextField
-        label="Add a term"
-        placeholder="e.g. Fall 2022, 3A,..."
-        type="text"
-        value={termName}
-        onChange={(event) => {
-          setTermName(event.target.value)
-        }}
-      />
-      <Button
-        variant="contained"
-        onClick={() => {
+      <Box
+        component="form"
+        onSubmit={() => {
           termController.addTerm(termName, dispatch)
           setTermName('')
         }}
+        sx={{
+          width: 3 / 10,
+          display: 'flex',
+          justifyContent: 'flex-start',
+          mt: 5,
+        }}
       >
-        Add
-      </Button>
+        <TextField
+          hiddenLabel
+          placeholder="Add a term"
+          type="text"
+          variant="filled"
+          size="small"
+          value={termName}
+          onChange={(event) => {
+            setTermName(event.target.value)
+          }}
+          sx={{ mr: 2 }}
+        />
+        <Button type="submit" variant="contained">
+          Add
+        </Button>
+      </Box>
     </Container>
   )
 }

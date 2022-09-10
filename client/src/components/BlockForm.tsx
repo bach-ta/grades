@@ -18,21 +18,23 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
       <DialogTitle>Add a Block</DialogTitle>
       <TextField
         label="Block Name"
-        variant="outlined"
+        variant="standard"
         type="text"
         value={blockName}
         onChange={(event) => {
           setBlockName(event.target.value)
         }}
+        sx={{ mb: 1, mx: 2 }}
       />
       <TextField
         label="Weight"
-        variant="outlined"
+        variant="standard"
         type="number"
         value={blockWeight}
         onChange={(event) => {
           setWeight(event.target.value)
         }}
+        sx={{ mb: 1, mx: 2 }}
       />
       <Button
         variant="contained"
