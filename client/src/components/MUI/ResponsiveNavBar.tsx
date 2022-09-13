@@ -1,18 +1,20 @@
+// SOURCE: https://mui.com/material-ui/react-app-bar/#ResponsiveAppBar.tsx
+
 import * as React from 'react'
 import AppBar from '@mui/material/AppBar'
+import AuthController from '../../controllers/authController'
+import Avatar from '@mui/material/Avatar'
 import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
 import IconButton from '@mui/material/IconButton'
-import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
 import MenuIcon from '@mui/icons-material/Menu'
-import Container from '@mui/material/Container'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import Tooltip from '@mui/material/Tooltip'
 import MenuItem from '@mui/material/MenuItem'
 import SchoolIcon from '@mui/icons-material/School'
-import AuthController from '../../controllers/authController'
+import Toolbar from '@mui/material/Toolbar'
+import Tooltip from '@mui/material/Tooltip'
+import Typography from '@mui/material/Typography'
 
 const authController = new AuthController()
 
@@ -32,7 +34,7 @@ const settings = [
     },
   },
 ]
-const APP_NAME = 'Grade Calculator'
+const APP_NAME = 'GPA Calculator'
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
@@ -57,7 +59,7 @@ const ResponsiveAppBar = () => {
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{ width: 4 / 5 }}>
         <Toolbar disableGutters>
           <SchoolIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography

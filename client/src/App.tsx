@@ -9,6 +9,9 @@ import { AppDispatch } from '.'
 import AuthController from './controllers/authController'
 import Views from './components/Views'
 import { UserContext } from './contexts/UserContext'
+import { ThemeProvider } from '@emotion/react'
+import { theme } from './components/MUI/Theme'
+import { CssBaseline } from '@mui/material'
 
 const authController = new AuthController()
 
@@ -41,9 +44,12 @@ const App: FC = () => {
   }, [user, dispatch])
 
   return (
-    <UserContext.Provider value={[user, setUser]}>
-      {user.loggedIn !== undefined && <Views />}
-    </UserContext.Provider>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <UserContext.Provider value={[user, setUser]}>
+        {user.loggedIn !== undefined && <Views />}
+      </UserContext.Provider>
+    </ThemeProvider>
   )
 }
 

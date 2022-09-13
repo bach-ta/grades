@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { FC } from 'react'
-import { useLocation } from 'react-router'
 import { Navigate, Outlet } from 'react-router-dom'
-import { UserContext } from '../contexts/UserContext'
+import { FC } from 'react'
 import ResponsiveAppBar from './MUI/ResponsiveNavBar'
+import { UserContext } from '../contexts/UserContext'
+import { useLocation } from 'react-router'
 
 const ProtectedRoutes: FC = () => {
   const isAuthenticated = React.useContext(UserContext)[0].loggedIn
