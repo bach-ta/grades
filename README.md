@@ -14,15 +14,20 @@ client
     │
     └───components
     │       MUI
-    │       Home.tsx
-    │       Term.tsx
-    │       Course.tsx
+    │       Block.tsx
     │       BlockForm.tsx
+    │       Course.tsx
+    │       EntryTable.tsx
+    │       Home.tsx
     │       Login.tsx
-    │       Register.tsx
-    │       Views.tsx
     │       ProtectedRoutes.tsx
+    │       Register.tsx
+    │       Term.tsx
     │       types.ts
+    │       Views.tsx
+    │
+    └───contexts
+    │       UserContext.tsx
     │
     └───controllers
     │       authController.ts
@@ -54,5 +59,6 @@ server
         block.sql
         course.sql
         term.sql
+        upd_block.sql
         user.sql
 ```
