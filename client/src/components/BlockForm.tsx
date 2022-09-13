@@ -31,6 +31,12 @@ const BlockForm: FC<Props> = ({ isOpen, handleClose, addBlock }) => {
         variant="standard"
         type="number"
         value={blockWeight}
+        InputProps={{
+          inputProps: {
+            max: 100,
+            min: 0,
+          },
+        }}
         onChange={(event) => {
           setWeight(event.target.value)
         }}

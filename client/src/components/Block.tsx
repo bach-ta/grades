@@ -7,9 +7,11 @@ import {
   TextField,
   Button,
   Grid,
+  Box,
 } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import BlockController from '../controllers/blockController'
+import EntryTable from './EntryTable'
 
 const blockController = new BlockController()
 
@@ -45,37 +47,47 @@ const Block: FC<Props> = ({ block }) => {
           <Typography variant="h5" component="div">
             {blockName}
           </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Weight: {blockAverage} / {blockWeight}
+          <Typography color="text.secondary">
+            Weight: {blockAverage || 'N/A'} / {blockWeight}
           </Typography>
-          {entryArray.map((entry, idx) => {
-            return <Typography key={idx}>{entry}</Typography>
-          })}
-          <TextField
-            label="Add a new entry"
-            placeholder="100"
-            type="text"
-            value={newEntry}
-            onChange={(event) => {
-              setNewEntry(event.target.value)
-            }}
-          />
-          <Button
-            variant="contained"
-            onClick={async () => {
-              if (newEntry == '') return
-              await blockController.updateEntries(
-                [...entryArray, parseFloat(newEntry)],
-                blockPk,
-                courseFk,
-                dispatch
-              )
-              setNewEntry('')
+          <EntryTable blockName={blockName} entries={entryArray} />
+
+          <Box
+            component="div"
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
             }}
           >
-            Add
-          </Button>
-          {/*  */}
+            <TextField
+              hiddenLabel
+              placeholder="Add a new entry"
+              type="text"
+              variant="filled"
+              size="small"
+              value={newEntry}
+              onChange={(event) => {
+                setNewEntry(event.target.value)
+              }}
+              sx={{ width: 7 / 10 }}
+            />
+            <Button
+              variant="contained"
+              sx={{ width: 2.5 / 10 }}
+              onClick={async () => {
+                if (newEntry == '') return
+                await blockController.updateEntries(
+                  [...entryArray, parseFloat(newEntry)],
+                  blockPk,
+                  courseFk,
+                  dispatch
+                )
+                setNewEntry('')
+              }}
+            >
+              Add
+            </Button>
+          </Box>
         </CardContent>
       </Card>
     </Grid>

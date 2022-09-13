@@ -42,13 +42,22 @@ const Term: FC = () => {
   const { term_name: termName, term_average: termAverage } = term
 
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, width: 4 / 5 }}>
+    <Container maxWidth="lg" sx={{ my: 4, width: 4 / 5 }}>
       <Typography variant="h5">{termName}</Typography>
-      <Typography>Term GPA: {termAverage}</Typography>
+
+      <Typography>Term GPA: {termAverage || 'N/A'}</Typography>
       <br />
-      {courses.map((course) => {
-        return <Course key={course.course_pk} coursePk={course.course_pk} />
-      })}
+      {!courses[0] ? (
+        <Typography sx={{ fontStyle: 'italic' }}>
+          No courses recorded
+        </Typography>
+      ) : (
+        <>
+          {courses.map((course) => {
+            return <Course key={course.course_pk} coursePk={course.course_pk} />
+          })}
+        </>
+      )}
 
       <Box
         sx={{
