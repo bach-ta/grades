@@ -29,7 +29,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:last-child td, &:last-child th': {
     border: 0,
   },
-  height: 10,
 }))
 
 interface Props {
@@ -40,9 +39,9 @@ interface Props {
 const EntryTable: FC<Props> = ({ blockName, entries }) => {
   return (
     <TableContainer component={Paper} sx={{ my: 1.5 }}>
-      <Table aria-label="customized table">
+      <Table aria-label="customized table" size="small">
         <TableHead>
-          <TableRow style={{ height: 10 }}>
+          <TableRow>
             <StyledTableCell>#</StyledTableCell>
             <StyledTableCell align="right">Grade</StyledTableCell>
           </TableRow>

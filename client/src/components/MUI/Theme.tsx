@@ -34,6 +34,13 @@ const themeOptions: ThemeOptions = {
     ].join(','),
     fontSize: 12,
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: { minWidth: 0 },
+      },
+    },
+  },
 }
 
 export const theme = createTheme(themeOptions)

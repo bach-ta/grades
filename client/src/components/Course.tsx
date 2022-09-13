@@ -58,7 +58,7 @@ const Course: FC<Props> = ({ coursePk }) => {
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Grid container spacing={1}>
+        <Grid container>
           {blocks.map((block) => {
             return <Block key={block.block_pk} block={block} />
           })}

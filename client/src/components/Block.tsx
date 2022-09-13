@@ -41,16 +41,20 @@ const Block: FC<Props> = ({ block }) => {
   const entryArray = JSON.parse(entries)
 
   return (
-    <Grid item xs={6}>
-      <Card style={{ backgroundColor: '#313131' }} sx={{ m: 2 }}>
+    <Grid item xs={12} sm={6} md={4} lg={3}>
+      <Card style={{ backgroundColor: '#313131' }} sx={{ m: 1 }}>
         <CardContent>
-          <Typography variant="h5" component="div">
-            {blockName}
-          </Typography>
+          <Typography variant="h6">{blockName}</Typography>
           <Typography color="text.secondary">
             Weight: {blockAverage || 'N/A'} / {blockWeight}
           </Typography>
-          <EntryTable blockName={blockName} entries={entryArray} />
+          {entryArray[0] ? (
+            <EntryTable blockName={blockName} entries={entryArray} />
+          ) : (
+            <Typography sx={{ fontStyle: 'italic', my: 1.5 }}>
+              No grades recorded
+            </Typography>
+          )}
 
           <Box
             component="div"
@@ -73,7 +77,7 @@ const Block: FC<Props> = ({ block }) => {
             />
             <Button
               variant="contained"
-              sx={{ width: 2.5 / 10 }}
+              sx={{ width: 2.75 / 10 }}
               onClick={async () => {
                 if (newEntry == '') return
                 await blockController.updateEntries(
