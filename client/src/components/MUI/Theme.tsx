@@ -1,6 +1,5 @@
-import { createTheme, ThemeProvider, styled } from '@mui/material/styles'
+import { ThemeProvider, createTheme, styled } from '@mui/material/styles'
 import { ThemeOptions } from '@mui/material'
-// import RobotoSlabTTF from './RobotoSlab-VariableFont_wght.ttf'
 
 const themeOptions: ThemeOptions = {
   palette: {

@@ -1,22 +1,22 @@
 import * as React from 'react'
-import { FC, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Card,
   CardContent,
-  Typography,
   Grid,
-  Tooltip,
   IconButton,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  Tooltip,
+  Typography,
 } from '@mui/material'
+import { FC, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import AddIcon from '@mui/icons-material/Add'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import BlockForm from './BlockForm'
-import BlockController from '../controllers/blockController'
 import Block from './Block'
+import BlockController from '../controllers/blockController'
+import BlockForm from './BlockForm'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 interface Props {
   coursePk: number

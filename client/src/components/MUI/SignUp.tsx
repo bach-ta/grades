@@ -1,18 +1,18 @@
 // SOURCE: https://github.com/mui/material-ui/blob/v5.10.1/docs/data/material/getting-started/templates/sign-up/SignUp.tsx
 
 import * as React from 'react'
-import Avatar from '@mui/material/Avatar'
-import Button from '@mui/material/Button'
-import CssBaseline from '@mui/material/CssBaseline'
-import TextField from '@mui/material/TextField'
-import Link from '@mui/material/Link'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { AuthProps, Copyright } from './common'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import Avatar from '@mui/material/Avatar'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
+import CssBaseline from '@mui/material/CssBaseline'
+import Grid from '@mui/material/Grid'
+import Link from '@mui/material/Link'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 
 export default function SignUp({ handleSubmit }: AuthProps) {
   return (

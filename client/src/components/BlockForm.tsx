@@ -1,6 +1,6 @@
 import * as React from 'react'
+import { Button, Dialog, DialogTitle, TextField } from '@mui/material'
 import { FC, useState } from 'react'
-import { Dialog, DialogTitle, TextField, Button } from '@mui/material'
 import { BlockParams1 } from './types'
 
 interface Props {

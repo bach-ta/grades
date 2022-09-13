@@ -1,15 +1,15 @@
 import * as React from 'react'
 import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
   Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
 } from 'react-router-dom'
 import Home from './Home'
-import Term from './Term'
 import Login from './Login'
-import Register from './Register'
 import ProtectedRoutes from './ProtectedRoutes'
+import Register from './Register'
+import Term from './Term'
 import { UserContext } from '../contexts/UserContext'
 
 const Views: React.FC = () => {

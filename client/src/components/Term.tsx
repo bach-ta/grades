@@ -1,12 +1,12 @@
 import * as React from 'react'
+import { Box, Button, Container, TextField, Typography } from '@mui/material'
 import { FC, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
-import { Typography, Button, TextField, Container, Box } from '@mui/material'
-import TermController from '../controllers/termController'
-import CourseController from '../controllers/courseController'
+import { useNavigate, useParams } from 'react-router-dom'
 import Course from './Course'
+import CourseController from '../controllers/courseController'
 import { Navigate } from 'react-router-dom'
+import TermController from '../controllers/termController'
 
 const termController = new TermController()
 const courseController = new CourseController()

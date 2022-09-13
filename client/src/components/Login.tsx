@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { FC } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
-import { UserContext } from '../contexts/UserContext'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AuthController from '../controllers/authController'
+import { FC } from 'react'
 import SignInSide from './MUI/SignInSide'
+import { UserContext } from '../contexts/UserContext'
 
 const authController = new AuthController()
 
