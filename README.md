@@ -1,4 +1,7 @@
-## File Structure
+### A full-stack web application that allows students to track grades of university courses
+![App screenshot](./img/grades-app-demo.png)
+
+### File Structure
 
 ```
 client
