@@ -48,7 +48,7 @@ const EntryTable: FC<Props> = ({ blockName, entries }) => {
         </TableHead>
         <TableBody>
           {entries.map((entry, idx) => (
-            <StyledTableRow key={entry}>
+            <StyledTableRow key={idx}>
               <StyledTableCell component="th" scope="row">
                 {blockName} {idx + 1}
               </StyledTableCell>

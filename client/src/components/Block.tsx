@@ -48,7 +48,7 @@ const Block: FC<Props> = ({ block }) => {
           <Typography color="text.secondary">
             Weight: {blockAverage || 'N/A'} / {blockWeight}
           </Typography>
-          {entryArray[0] ? (
+          {entryArray?.length ? (
             <EntryTable blockName={blockName} entries={entryArray} />
           ) : (
             <Typography sx={{ fontStyle: 'italic', my: 1.5 }}>
@@ -79,7 +79,7 @@ const Block: FC<Props> = ({ block }) => {
               variant="contained"
               sx={{ width: 2.75 / 10 }}
               onClick={async () => {
-                if (newEntry == '') return
+                if (newEntry === '') return
                 await blockController.updateEntries(
                   [...entryArray, parseFloat(newEntry)],
                   blockPk,

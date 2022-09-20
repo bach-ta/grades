@@ -35,7 +35,8 @@ router.put('/update_average', (req, res) => {
   const coursePk = req.body.coursePk
   db.query(
     ` UPDATE course,
-        (SELECT CAST(100 * SUM(block_average) / SUM(block_weight) AS DECIMAL(5,2))
+        (SELECT
+          LEAST(CAST(100 * SUM(block_average) / SUM(block_weight) AS DECIMAL(5,2)), 100)
           AS course_average
           FROM block WHERE course_fk = ? AND block_average IS NOT NULL
         ) AS result
